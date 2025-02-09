@@ -5,14 +5,13 @@ import bodyParser from 'body-parser';
 import userRoutes from './routes/userRoutes.js';
 import cartRoutes from './routes/cartRoutes.js';
 import productRoutes from './routes/productRoutes.js';
-// const mongoose = require('mongoose');
-// const bodyParser = require('body-parser');
-// const userRoutes = require('./routes/userRoutes');
-// const cartRoutes = require('./routes/cartRoutes');
+import dotenv from 'dotenv';
+
 const app = express();
 app.use(bodyParser.json());
+dotenv.config();
 
-mongoose.connect('mongodb://localhost:27017/ecommerce', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use('/users', userRoutes);
 app.use('/products', productRoutes);
